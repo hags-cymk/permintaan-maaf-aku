@@ -414,151 +414,98 @@
 
 
   <script>
+  // =====================
+  // PASSWORD
+  // =====================
+  function checkPassword() {
+    const password = document.getElementById("password").value;
+    const error = document.getElementById("error");
 
-    /* =====================
-       PASSWORD
-      ====================== */   
+    if (password === "0922") {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("content").style.display = "block";
+      error.style.display = "none";
 
-    fungsi checkPassword() {
+      // Coba mulai musik (browser dapat memblokir autoplay).
+      const music = document.getElementById("music");
+      music.play().catch(() => {});
+    } else {
+      error.style.display = "block";
+    }
+  }
 
-      konstanta password  =
-        document.getElementById("password").value;
+  // Tekan Enter untuk membuka.
+  document.getElementById("password").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      checkPassword();
+    }
+  });
 
-      jika (password === "0922") {
+  // =====================
+  // SLIDE
+  // =====================
+  let currentSlide = 0;
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
 
-        document.getElementById("login").style.display = "none";
-
-        document.getElementById("content").style.display = "block";
-
-        // Coba mulai musik
-        document.getElementById("music").play().catch(() => {});
-
-      } lain {
-
-        document.getElementById("error").style.display = "block";
-
-      }
+  function showSlide(index) {
+    if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else if (index >= slides.length) {
+      currentSlide = 0;
+    } else {
+      currentSlide = index;
     }
 
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === currentSlide);
+    });
 
-    /* =====================
-       SLIDE
-     ====================== */  
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentSlide);
+    });
+  }
 
-    biarkan currentSlide  =  0;
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
 
-    konstanta slides  =
-      document.querySelectorAll(".slide");
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+  }
 
-    konstanta dots  =
- dokumen. querySelectorSemua(".dot");querySelectorSemua(".dot");
+  // Dot bisa diklik.
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => showSlide(index));
+    dot.style.cursor = "pointer";
+  });
 
+  // =====================
+  // TOMBOL MAAFIN
+  // =====================
+  function forgive() {
+    document.getElementById("thanks").style.display = "block";
+  }
 
- fungsi Jika (arusSlide < 0) { jika (arusSlide0) {
+  // =====================
+  // HATI JATUH
+  // =====================
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 15 + 12) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
 
- slide. 
- slide.  
-      });;
+    document.body.appendChild(heart);
 
- titik-titik. 
- dot.  dot.  
-       });; });;
+    setTimeout(() => {
+      heart.remove();
+    }, 8000);
+  }
 
- slide 
-
- titik 
-
-     } }
-
-
- fungsi 
-
- arusSlide ++; 
-
- Jika (currentSlide >= slide.panjang) { jika (currentSlide >= slide.panjang) {
- arusSlide = 
-        }  } 
-
- showSlide (arusSlide);  showSlide (arusSlide);  
-
-     } 
-
-
- fungsi 
-
-/html>html>prevSlide(</
-
- Jika (arusSlide < 0) { 
- currentSlide = slide. 
-        } } } 
-
-      }  showSlide (arusSlide) 
-
-     } 
-
-
-      showSlideshowSlide(arusSlide) showSlideshowSlide(arusSlide
-     } 
-/* ===================== /* =====================
-
-}
-
-(
-
-showSlideshowSlide
-
-
-     /* ===================== 
-/* =====================
-}
-
- dokumen 
-       . 
-        .  
-
-        jika (event.kunci   ===   "Masuk") {
-          checkPassword();
-        }
-
-      });
-
-
-              ====================== *    
-        ====================== *    
- /* ===================== /    
-
- /   
-
-)
-
-}
-
-}
-
-            ====================== */ 
- Math.random() * 100 + "vw"; 
-
-       heart.style.fontSize = 
- (Math.random() * 15 + 12) + "px"; 
-
-       heart.style.animationDuration = 
- (Math.random() * 3 + 4) + "s"; 
-
-           setTimeout(() => {  setTimeout(() => {    
-
-           setTimeout(() => {     
- /* =====================     
- setInterval (createHeart, 500); 
-
-            ====================== */          /* =====================           /* =====================          
-
-   /* =====================       
-
-  </script>
-
-</
-</
-
-
-
+  setInterval(createHeart, 500);
+</script>
+</body>
 </html>
